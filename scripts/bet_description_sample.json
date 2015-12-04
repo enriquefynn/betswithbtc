@@ -1,0 +1,20 @@
+{
+    "category": "League of Legends",
+    "parts": [
+        {
+            "name": "Ultra Dupa Team",
+            "address": "n1Ye8HV4CXvgFM8VjMBR9ScqSWqXVVrXDX"
+        },
+        {
+            "name": "Team Masters of Universe",
+            "address": "n1Th7hsckfroEntvSJ13WtLvPGKxDJQghN"
+        }
+    ],
+    "date_over": "1970-01-25T20:00:00",   
+
+    "date_begun": "1970-01-01T12:34:56",
+    "tax": "0.1",
+    "tax_addr": "mshC8w6vx6THKrGc842JaTQqHgjdishQKs",
+
+    "winner": "Team Masters of Universe"
+}

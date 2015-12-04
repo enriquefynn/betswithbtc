@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+        <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
+        <link rel="stylesheet" href="./bower_components/angular-material/angular-material.css" />
+        <link rel="stylesheet" href="./static/1o1bet.css" />
+        <title>1o1bet: Bitcoin Anonymous Bets</title>
+    </head>
+    <body ng-app="app" layout="column" ng-controller="materialCtrl as material"> 
+    <md-toolbar layout="row">
+        <md-button class="menu" hide-gt-sm ng-click="material.toggleList()" aria-label="Show User List">
+            <md-icon md-svg-icon="menu" ></md-icon>
+        </md-button>
+        <h1>1o1bets - Bitcoin Anonymous Bets</h1>
+    </md-toolbar>
+
+    <div flex layout="row">
+
+        <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" class="md-whiteframe-z2" md-component-id="left">
+          <md-list>
+            <md-list-item>
+                <md-button ng-click="material.selectCategory('suggestions')">
+                  <md-icon class="avatar" md-svg-icon="thumbsup"></md-icon>
+                    Suggestions
+                </md-button>
+            </md-list-item>
+          </md-list>
+        </md-sidenav>
+
+        <md-content flex id="content">
+        <md-toolbar class="md-hue-1">
+            <div class="md-toolbar-tools">
+                <h2>
+                    <span>Suggestions</span>
+                </h2>
+                <span flex></span>
+                <md-button class="md-raised md-primary" ng-click="material.showAddSuggestion($event)">Suggest!</md-button>
+                <span flex></span>
+                <span>Order:</span>
+                <md-select ng-model="selectOrder" placeholder="Likes highest first">
+                    <md-option>Likes highest first</md-option>
+                    <md-option>Date ending first</md-option>
+                </md-select>
+            </div>
+        </md-toolbar>
+        <!-- Bets -->
+        <div ng-controller="betsCtrl as bets">
+        <md-grid-list
+            md-cols-sm="1" md-cols-md="2" md-cols-gt-md="6"
+            md-row-height-gt-md="1:1" md-row-height="4:3"
+            md-gutter="8px" md-gutter-gt-sm="4px">
+            <md-grid-tile ng-repeat="bet in currentBets | orderBy: '-likes'"
+                  md-rowspan="1"
+                  md-colspan="1"
+                  md-colspan-sm="1"
+                  class="repeated-item blue">
+                  <md-list>
+                      <md-grid-tile-header layout-align="center">{{bet.category}}</md-grid-tile-header>
+                      <md-list-item class="md-3-line">
+                            <div class="md-list-item-text">
+                                {{ bet.parts[0].name }}
+                                X
+                                {{ bet.parts[1].name }}
+                            </div>
+                      </md-list-item>
+                  </md-list>
+                <md-grid-tile-footer layout-align="end">
+                    <!--{{bet.created_date | date}}-->
+                    <span class="md-subhead">{{bet.likes}}</span>
+                    <a href="" ng-click="bets.like(bet._id, true)"><md-icon md-svg-icon="thumbsup" style="color:green; height: 24px;"></md-icon></a>
+                    <a href="" ng-click="bets.like(bet._id, false)"><md-icon class="md-warn" md-svg-icon="thumbsdown" style="height: 24px;"></md-icon></a>
+                </md-grid-tile-footer>
+            </md-grid-tile>
+        </md-grid-list>
+        </div>
+        </md-content>
+    </div>
+
+    <script src="./bower_components/angular/angular.js"></script>
+    <script src="./bower_components/angular-animate/angular-animate.js"></script>
+    <script src="./bower_components/angular-aria/angular-aria.js"></script>
+    <script src="./bower_components/angular-material/angular-material.js"></script>
+    <script src="./bower_components/angular-messages/angular-messages.js"></script>
+    <script src="./bower_components/socket.io-client/socket.io.js"></script>
+    <script src="./static/controllers/app.socketCtrl.js"></script>
+    <script src="./static/controllers/app.betsCtrl.js"></script>
+    <script src="./static/controllers/app.factory.js"></script>
+    <script src="./static/material.js"></script>
+    <script src="./static/controllers/controllers.js"></script>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+<md-dialog aria-label="Add Suggestion" ng-app="app" ng-controller="materialCtrl as matCtrl">
+    <form name="sugForm">
+        <md-content layout="row" layout-sm="column">
+            <md-input-container>
+                <label>First Team</label>
+                <input ng-model="suggestion.team1" name="team1" required/>
+                <div ng-messages="sugForm.team1.$error" role="alert" ng-if="!sugForm.team1.$untouched">
+                    <div ng-message="required">That's required!</div>
+                </div>
+            </md-input-container>
+            <md-input-container>
+              <label>Second Team</label>
+              <input ng-model="suggestion.team2" name="team2" required/>
+              <div ng-messages="sugForm.team2.$error" role="alert" ng-if="!sugForm.team2.$untouched">
+                    <div ng-message="required">That's required!</div>
+                </div>
+            </md-input-container>
+        </md-content>
+        <md-input-container>
+            <label>Category (ex: Soccer)</label>
+            <input ng-model="suggestion.category" name="category" required/>
+            <div ng-messages="sugForm.category.$error" role="alert" ng-if="!sugForm.category.$untouched">
+                    <div ng-message="required">That's required!</div>
+                </div>
+        </md-input-container>
+        <md-input-container>
+            <label>URL that we can check other informations</label>
+            <input ng-model="suggestion.website" name="website" required/>
+            <div ng-messages="sugForm.website.$error" role="alert" ng-if="!sugForm.website.$untouched">
+                    <div ng-message="required">That's required!</div>
+                </div>
+        </md-input-container>
+        <md-input-container>
+            <img src="{{captcha}}" width="180"> 
+            <label>Captcha</label>
+            <input ng-model="suggestion.captcha" name="captcha" required/>
+            <div ng-messages="sugForm.captcha.$error" role="alert" ng-if="!sugForm.captcha.$untouched">
+                <div ng-message="required">That's required!</div>
+            </div>
+            <div class="alert" ng-if="wrongCaptcha" style="color: red;">
+                <div>Wrong Captcha!</div>
+            </div>
+        </md-input-container>
+        <div class="md-actions" layout="row">
+            <md-button ng-disabled="!sugForm.$valid" ng-click="addSuggestion(suggestion)" class="md-primary">
+            Add
+            </md-button>
+            <md-button ng-click="hide()" class="md-warn">
+            Cancel
+            </md-button>
+        </div>
+    </form>
+</md-dialog>
